@@ -6,8 +6,13 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 const morgan = require("morgan");
 app.use(morgan("tiny"));
+const cors = require("cors");
+
+app.use(cors());
+app.options("*", cors());
 
 const productRouter = require("./routes/products");
+const categoryRouter = require("./routes/categories");
 const mongoose = require("mongoose");
 mongoose
   .connect(process.env.MONGO_URL)
@@ -16,6 +21,7 @@ mongoose
 const api = process.env.API_URL;
 
 app.use(`${api}/products`, productRouter);
+app.use(`${api}/categories`, categoryRouter);
 
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
