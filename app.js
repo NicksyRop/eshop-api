@@ -13,6 +13,8 @@ app.options("*", cors());
 
 const productRouter = require("./routes/products");
 const categoryRouter = require("./routes/categories");
+const userRouter = require("./routes/users");
+const orderRouter = require("./routes/orders");
 const mongoose = require("mongoose");
 mongoose
   .connect(process.env.MONGO_URL)
@@ -22,6 +24,8 @@ const api = process.env.API_URL;
 
 app.use(`${api}/products`, productRouter);
 app.use(`${api}/categories`, categoryRouter);
+app.use(`${api}/users`, userRouter);
+app.use(`${api}/orders`, orderRouter);
 
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
