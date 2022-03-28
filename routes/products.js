@@ -105,12 +105,8 @@ router.delete("/:id", async (req, res) => {
 
 //get product count
 
-router.get("/count", async (req, res) => {
-  const productCount = await Product.countDocuments({}, (err, count) => {
-    if (err) return handleError(err);
-    console.log("there are %d kittens", count);
-  });
-  console.log(productCount);
+router.get("/get/count", async (req, res) => {
+  const productCount = await Product.countDocuments();
 
   if (!productCount) return res.status(500).json({ success: false });
 
