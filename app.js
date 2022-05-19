@@ -30,6 +30,8 @@ app.use(
     path: [
       "/api/v1/users/login",
       "/api/v1/users/register",
+      { url: /\/public\/uploads(.*)/, methods: ["GET", "OPTIONS"] },
+
       { url: /\/api\/v1\/products(.*)/, methods: ["GET", "OPTIONS"] },
       { url: /\/api\/v1\/categories(.*)/, methods: ["GET", "OPTIONS"] },
     ],
@@ -44,6 +46,7 @@ const authJwt = require("./helper/error");
 app.use(morgan("tiny"));
 
 app.use(authJwt);
+app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 
 app.use(cors());
 app.options("*", cors());
